@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be29622f-46b4-4fac-80f3-5655f39931f1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/volga.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/volga.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Cell.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Cell.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Field.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Field.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Player.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Player.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Service/Game/GameService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Service/Game/GameService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_09_27_082211_create_fields_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_09_27_082211_create_fields_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_09_27_135857_create_cells_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_09_27_135857_create_cells_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +178,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1632725068994</updated>
-      <workItem from="1632725070667" duration="15231000" />
+      <workItem from="1632725070667" duration="16608000" />
     </task>
     <servers />
   </component>

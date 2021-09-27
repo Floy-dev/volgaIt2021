@@ -7,6 +7,7 @@ use App\Field;
 use App\Game;
 use App\Player;
 use App\Service\Game\Dto\GameDto;
+use Illuminate\Support\Facades\DB;
 
 class GameService
 {
@@ -33,10 +34,10 @@ class GameService
         for ($i = 0; $i < 2; $i++){
             $player = new Player();
             $player->fill([
-                'color' => self::colors[rand(0, 9)]
+                'color' => self::colors[rand(0, 6)]
             ]);
-            $player->save();
             $player->game()->associate($game)->save();
+            $player->save();
             $players[] = $player;
         }
         $game->players()->saveMany($players);
@@ -50,33 +51,59 @@ class GameService
     private function makeField(GameDto $dto, Game $game): void
     {
         $field = new Field();
-
-        $cells = $this->makeCells();
-
         $field->fill([
             'width' => $dto->getWidth(),
             'height' => $dto->getHeight(),
         ]);
+        $field->save();
+
+        $this->makeCells($game, $field);
 
         $game->field()->save($field);
+        $field->save();
+
         $field->game()->associate($game)->save();
     }
 
 
-    private function makeCells(){
+    private function makeCells(Game $game, Field $field){
         $cells = [];
 
         for ($i = 0; $i < 5; $i++){
             for ($j = 0; $j < 10; $j++){
 
                 $cell = new Cell();
-                $cell->fill([
-                    'color' => self::colors[rand(0, 9)],
-                    'playerId' => 0
-                ]);
 
-                $cells[$i][$j] = $cell;
+                $players = DB::table('players')->where('game_id', $game->getAttribute('id'))->get('id');
+
+                if ($i == 0 && $j == 0){
+
+                    $cell->fill([
+                        'color' => self::colors[rand(0, 6)],
+                        'playerId' => $players[0]->id
+                    ]);
+                }
+
+                else if ($i == 4 && $j == 9){
+                    $cell->fill([
+                        'color' => self::colors[rand(0, 6)],
+                        'playerId' => $players[1]->id
+                    ]);
+                }
+
+                else {
+                    $cell->fill([
+                        'color' => self::colors[rand(0, 6)],
+                        'playerId' => 0
+                    ]);
+                }
+
+                $cells[] = $cell;
+                $cell->field()->associate($field)->save();
+                $cell->save();
             }
         }
+
+        $field->cells()->saveMany($cells);
     }
 }

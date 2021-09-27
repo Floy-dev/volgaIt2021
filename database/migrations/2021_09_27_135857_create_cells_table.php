@@ -15,6 +15,12 @@ class CreateCellsTable extends Migration
     {
         Schema::create('cells', function (Blueprint $table) {
             $table->id();
+            $table->string('color');
+            $table->integer('playerId');
+
+            $table->integer('field_id')->unsigned();
+            $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

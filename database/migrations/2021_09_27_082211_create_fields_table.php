@@ -14,7 +14,7 @@ class CreateFieldsTable extends Migration
     public function up()
     {
         Schema::create('fields', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
             $table->string('width');
             $table->string('height');
 

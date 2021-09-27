@@ -19,4 +19,6 @@ class Player extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    public $timestamps = false;
 }

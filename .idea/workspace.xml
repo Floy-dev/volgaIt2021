@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be29622f-46b4-4fac-80f3-5655f39931f1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/volga.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/volga.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,6 +138,7 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/goldspecdigital/laravel-eloquent-uuid" />
     </include_path>
   </component>
   <component name="ProjectId" id="1yiCYTRUfpDEOFEAJp1T0zpQjrH" />
@@ -144,9 +151,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Traits" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Traits" />
+      <recent name="$PROJECT_DIR$/app/Exceptions" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Service/Game" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -162,11 +179,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1632725068994</updated>
-      <workItem from="1632725070667" duration="1286000" />
+      <workItem from="1632725070667" duration="15231000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

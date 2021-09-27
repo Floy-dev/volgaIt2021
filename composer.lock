@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3d88fa6639c9463d85260309c03bb68",
+    "content-hash": "d530777ef71b60094f7533defe468946",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -563,6 +563,67 @@
                 }
             ],
             "time": "2021-04-26T11:24:25+00:00"
+        },
+        {
+            "name": "goldspecdigital/laravel-eloquent-uuid",
+            "version": "v7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/goldspecdigital/laravel-eloquent-uuid.git",
+                "reference": "36fb8ee2092f96c02edbdef72bdc80b29fa83680"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/goldspecdigital/laravel-eloquent-uuid/zipball/36fb8ee2092f96c02edbdef72bdc80b29fa83680",
+                "reference": "36fb8ee2092f96c02edbdef72bdc80b29fa83680",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.0",
+                "php": "^7.2.5"
+            },
+            "require-dev": {
+                "ext-pdo": "*",
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^8.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GoldSpecDigital\\LaravelEloquentUUID\\UuidServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GoldSpecDigital\\LaravelEloquentUUID\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Inamdar",
+                    "email": "matt@goldspecdigital.com"
+                }
+            ],
+            "description": "A simple drop-in solution for providing UUID support for the IDs of your Eloquent models.",
+            "homepage": "https://github.com/goldspecdigital/laravel-eloquent-uuid",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "php",
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/goldspecdigital/laravel-eloquent-uuid/issues",
+                "source": "https://github.com/goldspecdigital/laravel-eloquent-uuid/tree/v7.0.0"
+            },
+            "time": "2020-03-04T18:44:04+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

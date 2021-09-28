@@ -18,4 +18,6 @@ class Cell extends Model
     {
         return $this->belongsTo(Field::class);
     }
+
+    public $timestamps = false;
 }

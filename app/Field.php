@@ -12,6 +12,7 @@ class Field extends Model
         'width',
         'height',
     ];
+    protected $with = ['cells'];
 
     /**
      * @return BelongsTo

@@ -15,6 +15,8 @@ class Game extends Model
     public $incrementing = false;
     protected $guarded = [];
 
+    protected $with = array('field', 'players');
+
     /**
      * @return HasOne
      */

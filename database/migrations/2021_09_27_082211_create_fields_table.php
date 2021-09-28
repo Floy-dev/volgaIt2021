@@ -20,8 +20,6 @@ class CreateFieldsTable extends Migration
 
             $table->string('game_id')->nullable();
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
     /**

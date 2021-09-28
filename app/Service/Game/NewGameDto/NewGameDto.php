@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\Game\Dto;
+namespace App\Service\Game\NewGameDto;
 
-class GameDto
+class NewGameDto
 {
     /** @var string */
     private $width;
@@ -12,9 +12,9 @@ class GameDto
 
     /**
      * @param $request
-     * @return GameDto
+     * @return NewGameDto
      */
-    public static function getDto($request): GameDto
+    public static function getDto($request): NewGameDto
     {
         $dto = new self;
 

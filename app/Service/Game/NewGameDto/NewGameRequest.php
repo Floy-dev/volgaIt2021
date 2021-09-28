@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Service\Game\Dto;
+namespace App\Service\Game\NewGameDto;
 
 use App\Exceptions\BusinessException;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class GameRequest
+class NewGameRequest
 {
     /**
      * @var Request
@@ -27,9 +26,9 @@ class GameRequest
     /**
      * @throws ValidationException
      */
-    public function getDto(): GameDto
+    public function getDto(): NewGameDto
     {
-        return GameDto::getDto($this->getRequest()) ;
+        return NewGameDto::getDto($this->getRequest()) ;
     }
 
     /**

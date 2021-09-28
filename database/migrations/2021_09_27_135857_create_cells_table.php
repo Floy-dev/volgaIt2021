@@ -20,8 +20,6 @@ class CreateCellsTable extends Migration
 
             $table->integer('field_id')->unsigned();
             $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
 

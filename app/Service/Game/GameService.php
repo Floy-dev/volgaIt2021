@@ -80,6 +80,10 @@ class GameService
             throw new BusinessException('Игрок с указанным номером не может выбрать указанный цвет', 409);
         }
 
+        if ($game->getAttribute('currentPlayerId') == $enemy->getAttribute('id')){
+            throw new BusinessException('Игрок с указанным номером не может сейчас ходить', 403);
+        }
+
         $player->update([
            'color' => $dto->getColor()
         ]);
@@ -298,7 +302,7 @@ class GameService
                     ]);
                 }
 
-                else if ($i == 4 && $j == 9){
+                else if ($i + 1 == $field->getAttribute('width') && $j + 1 == $field->getAttribute('height')){
                     $cell->fill([
                         'color' => self::colors[rand(0, 6)],
                         'playerId' => $players[1]->id

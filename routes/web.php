@@ -9,4 +9,4 @@ Route::get('/', [HomeController::class, 'home']);
 
 Route::post('/game', [GameController::class, 'newGame']);
 Route::get('/game/{gameId}', [GameController::class, 'game']);
-Route::put('/game', [GameController::class, 'moveGame']);
+Route::put('/game/{gameId}', [GameController::class, 'moveGame']);

@@ -99,6 +99,9 @@ input:focus {
   display: inline-block;
   width: 30px;
   height: 30px;
+  transform: rotate(45deg);
+  margin-right: 14px;
+  margin-top: -10px;
 }
 
 .block__current {
@@ -126,6 +129,10 @@ input:focus {
 
 .hide {
   visibility: hidden;
+}
+
+.even {
+  transform: rotate(45deg) translateX(17px) translateY(-17px);
 }
 
 @-webkit-keyframes blink {

@@ -85,3 +85,46 @@ textarea:focus, input:focus{
         transform: scale(1.1);
     }
 }
+
+.block{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.block__current{
+    animation: blink infinite 1s;
+}
+
+.room{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: black;
+}
+
+.room__button{
+    cursor: pointer;
+    transition: 0.2s all;
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+.hide{
+    visibility: hidden;
+}
+
+@keyframes blink {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}

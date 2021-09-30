@@ -103,7 +103,7 @@ class GameService
             }
         }
 
-        if ($count / ($field->getAttribute('width') * $field->getAttribute('height') * 100) > 50){
+        if ($count * 100 / ($field->getAttribute('width') * $field->getAttribute('height')) >= 45){
             $game->update([
                'winnerPlayerId' => $player->getAttribute('id')
             ]);
@@ -114,6 +114,14 @@ class GameService
             'currentPlayerId' => $enemy->getAttribute('id')
         ]);
         $game->save();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getColors(): array
+    {
+        return self::colors;
     }
 
     /**

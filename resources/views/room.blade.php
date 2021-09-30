@@ -9,14 +9,14 @@
     <title>Document</title>
 </head>
 <body class="wrapper room">
-    <div class="container vertical_center _cells_container">
+    <div class="container vertical_center _cells_container" style="transform: scaleY(-1)">
         @include('room_cells')
     </div>
 
     <div>
         @for ($i = 0; $i < count($colors); $i++)
             <button class="room__button _put_color" data-game-id="{{ $id }}" data-color="{{ $colors[$i] }}">
-                <span class="block" style="background-color: {{ $colors[$i] }}"></span>
+                <span style="background-color: {{ $colors[$i] }}; width: 30px; height: 30px; display: inline-block"></span>
             </button>
         @endfor
     </div>

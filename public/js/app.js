@@ -20214,6 +20214,10 @@ var game = {
                       gameId: button.dataset.gameId,
                       color: button.dataset.color
                     });
+
+                    _this.checkWinner({
+                      gameId: button.dataset.gameId
+                    });
                   })["catch"](function (reason) {
                     alert(reason.response.data);
                   });
@@ -20232,18 +20236,48 @@ var game = {
       }());
     });
   },
+  checkWinner: function checkWinner(data) {
+    axios.get("/game/".concat(data.gameId)).then( /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(response) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(response.data.winnerPlayerId !== 0)) {
+                  _context2.next = 3;
+                  break;
+                }
+
+                _context2.next = 3;
+                return axios.post("/player/".concat(response.data.winnerPlayerId)).then(function (response) {
+                  alert("\u041F\u043E\u0431\u0435\u0434\u0438\u043B \u0438\u0433\u0440\u043E\u043A \u0441 \u0446\u0432\u0435\u0442\u043E\u043C ".concat(response.data.color));
+                });
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
+  },
   redrawField: function redrawField(data) {
     var _this2 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
       var view, container, _button, button;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               view = null;
-              _context2.next = 3;
+              _context3.next = 3;
               return axios.post("/room/cells/".concat(data.gameId)).then(function (response) {
                 view = response.data.view;
               });
@@ -20252,11 +20286,11 @@ var game = {
               container = document.querySelector("._cells_container");
 
               if (!(!container || !view)) {
-                _context2.next = 6;
+                _context3.next = 6;
                 break;
               }
 
-              return _context2.abrupt("return");
+              return _context3.abrupt("return");
 
             case 6:
               container.innerHTML = view;
@@ -20278,10 +20312,10 @@ var game = {
 
             case 11:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }))();
   },
   handleSignInButton: function handleSignInButton() {

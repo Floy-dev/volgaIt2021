@@ -43,6 +43,7 @@ class RoomController extends Controller
             'currentPlayerId' => $game->getAttribute('currentPlayerId'),
             'colors' => $this->gameService->getColors(),
             'id' => $game->getAttribute('id'),
+            'type' => $this->gameService->getType(),
             'inc' => 0
         ]);
     }
@@ -59,7 +60,7 @@ class RoomController extends Controller
         $game = $this->gameService->getGame($dto);
         $field = $game->getAttribute('field');
 
-        $view = view('room_cells',[
+        $view = view("room_cells_" . $this->gameService->getType() ,[
             'cells' => $field->getAttribute('cells'),
             'width' => $field->getAttribute('width'),
             'height' => $field->getAttribute('height'),

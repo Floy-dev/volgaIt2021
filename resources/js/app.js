@@ -38,12 +38,25 @@ let game = {
                 })
                     .then((response) => {
                         this.redrawField({gameId: button.dataset.gameId, color: button.dataset.color})
+                        this.checkWinner({gameId: button.dataset.gameId})
                     })
                     .catch(reason => {
                         alert(reason.response.data)
                     })
             })
         })
+    },
+
+    checkWinner(data){
+        axios.get(`/game/${data.gameId}`)
+            .then(async (response) => {
+                if (response.data.winnerPlayerId !== 0) {
+                    await axios.post(`/player/${response.data.winnerPlayerId}`)
+                        .then((response) => {
+                            alert(`Победил игрок с цветом ${response.data.color}`)
+                        })
+                }
+            })
     },
 
     async redrawField(data){

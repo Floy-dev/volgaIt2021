@@ -10,7 +10,11 @@
 </head>
 <body class="wrapper room">
     <div class="container vertical_center _cells_container" style="transform: scaleY(-1)">
-        @include('room_cells')
+        @if($type == 'rhombus')
+            @include('room_cells_rhombus')
+        @else
+            @include('room_cells_square')
+        @endif
     </div>
 
     <div>

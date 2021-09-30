@@ -95,7 +95,13 @@ input:focus {
   transform: scale(1.1);
 }
 
-.block {
+.block__square {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.block__rhombus {
   display: inline-block;
   width: 30px;
   height: 30px;

@@ -10,11 +10,13 @@ use App\Player;
 use App\Service\Game\GameDto\GameDto;
 use App\Service\Game\MoveGameDto\MoveGameDto;
 use App\Service\Game\NewGameDto\NewGameDto;
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 class GameService
 {
     const colors = ['blue', 'green', 'cyan', 'red', 'magenta', 'yellow', 'white'];
+    const type = 'rhombus'; // rhombus | square
 
     /**
      * @param NewGameDto $dto
@@ -43,6 +45,14 @@ class GameService
             throw new BusinessException('Игра с указанным ID не существует', 404);
         }
         return $game;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return self::type;
     }
 
     /**
@@ -96,10 +106,12 @@ class GameService
         $playerCells = $this->getPlayerCells($cells, $field, $player);
         $count = $this->getPlayerCellsCount($playerCells);
 
-        for ($i = 0; $i < count($playerCells); $i++){
-            for ($j = 0; $j < count($playerCells[$i]); $j++){
-                if ($playerCells[$i][$j] == null) continue;
-                $this->checkNeighbors($serializedCells, $i, $j, $player, $count);
+        for ($y = 0; $y < count($playerCells); $y++){
+            for ($x = 0; $x < count($playerCells[$y]); $x++){
+                if ($playerCells[$y][$x] == null) continue;
+                self::type == 'rhombus'
+                    ? $this->checkNeighborsRhombus($serializedCells, $x, $y, $player, $count)
+                    : $this->checkNeighborsSquare($serializedCells, $x, $y, $player, $count);
             }
         }
 
@@ -131,26 +143,43 @@ class GameService
      * @param Player $player
      * @param int $count
      */
-    public function checkNeighbors(array $serializedCells, int $x, int $y, Player $player, int &$count){
-        if ($x - 1 > 0 &&
-            $serializedCells[$x - 1][$y]->getAttribute('color') == $player->getAttribute('color') &&
-            $serializedCells[$x - 1][$y]->getAttribute('playerId') == 0
-        ){ $this->changeNeighbor($serializedCells, $x - 1, $y, $player, $count); }
+    public function checkNeighborsRhombus(array $serializedCells, int $x, int $y, Player $player, int &$count){
+        if ($y % 2 == 0){
+            if ($x - 1 >= 0 &&
+                $y - 1 >= 0 &&
+                $serializedCells[$y - 1][$x - 1]->getAttribute('color') == $player->getAttribute('color') &&
+                $serializedCells[$y - 1][$x - 1]->getAttribute('playerId') == 0
+            ){ $this->changeNeighborRhombus($serializedCells, $x - 1, $y - 1, $player, $count); }
 
-        if ($x + 1 < count($serializedCells) &&
-            $serializedCells[$x + 1][$y]->getAttribute('color') == $player->getAttribute('color') &&
-            $serializedCells[$x + 1][$y]->getAttribute('playerId') == 0
-        ){ $this->changeNeighbor($serializedCells, $x + 1, $y, $player, $count); }
+            if ($x - 1 >= 0 &&
+                $y + 1 < count($serializedCells) &&
+                $serializedCells[$y + 1][$x - 1]->getAttribute('color') == $player->getAttribute('color') &&
+                $serializedCells[$y + 1][$x - 1]->getAttribute('playerId') == 0
+            ){ $this->changeNeighborRhombus($serializedCells, $x - 1, $y + 1, $player, $count); }
+        }
+        else{
+            if ($x + 1 < count($serializedCells[$y]) &&
+                $y + 1 < count($serializedCells) &&
+                $serializedCells[$y + 1][$x + 1]->getAttribute('color') == $player->getAttribute('color') &&
+                $serializedCells[$y + 1][$x + 1]->getAttribute('playerId') == 0
+            ){ $this->changeNeighborRhombus($serializedCells, $x + 1, $y + 1, $player, $count); }
 
-        if ($y - 1 > 0 &&
-            $serializedCells[$x][$y - 1]->getAttribute('color') == $player->getAttribute('color') &&
-            $serializedCells[$x][$y - 1]->getAttribute('playerId') == 0
-        ){ $this->changeNeighbor($serializedCells, $x, $y - 1, $player, $count); }
+            if ($x + 1 < count($serializedCells[$y]) &&
+                $y - 1 >= 0 &&
+                $serializedCells[$y - 1][$x + 1]->getAttribute('color') == $player->getAttribute('color') &&
+                $serializedCells[$y - 1][$x + 1]->getAttribute('playerId') == 0
+            ){ $this->changeNeighborRhombus($serializedCells, $x + 1, $y - 1, $player, $count); }
+        }
 
-        if ($y + 1 < count($serializedCells[$x]) &&
-            $serializedCells[$x][$y + 1]->getAttribute('color') == $player->getAttribute('color') &&
-            $serializedCells[$x][$y + 1]->getAttribute('playerId') == 0
-        ){ $this->changeNeighbor($serializedCells, $x, $y + 1, $player, $count); }
+        if ($y - 1 >= 0 &&
+            $serializedCells[$y - 1][$x]->getAttribute('color') == $player->getAttribute('color') &&
+            $serializedCells[$y - 1][$x]->getAttribute('playerId') == 0
+        ){ $this->changeNeighborRhombus($serializedCells, $x, $y - 1, $player, $count); }
+
+        if ($y + 1 < count($serializedCells) &&
+            $serializedCells[$y + 1][$x]->getAttribute('color') == $player->getAttribute('color') &&
+            $serializedCells[$y + 1][$x]->getAttribute('playerId') == 0
+        ){ $this->changeNeighborRhombus($serializedCells, $x, $y + 1, $player, $count); }
     }
 
     /**
@@ -160,15 +189,62 @@ class GameService
      * @param Player $player
      * @param int $count
      */
-    public function changeNeighbor(array $serializedCells, int $x, int $y, Player $player, int &$count){
-        $serializedCells[$x][$y]->update([
+    public function checkNeighborsSquare(array $serializedCells, int $x, int $y, Player $player, int &$count){
+        if ($y - 1 >= 0 &&
+            $serializedCells[$y - 1][$x]->getAttribute('color') == $player->getAttribute('color') &&
+            $serializedCells[$y - 1][$x]->getAttribute('playerId') == 0
+        ){ $this->changeNeighborSquare($serializedCells, $x, $y - 1, $player, $count); }
+
+        if ($y + 1 < count($serializedCells) &&
+            $serializedCells[$y + 1][$x]->getAttribute('color') == $player->getAttribute('color') &&
+            $serializedCells[$y + 1][$x]->getAttribute('playerId') == 0
+        ){ $this->changeNeighborSquare($serializedCells, $x, $y + 1, $player, $count); }
+
+        if ($x - 1 >= 0 &&
+            $serializedCells[$y][$x - 1]->getAttribute('color') == $player->getAttribute('color') &&
+            $serializedCells[$y][$x - 1]->getAttribute('playerId') == 0
+        ){ $this->changeNeighborSquare($serializedCells, $x - 1, $y, $player, $count); }
+
+        if ($x + 1 < count($serializedCells[$x]) &&
+            $serializedCells[$y][$x + 1]->getAttribute('color') == $player->getAttribute('color') &&
+            $serializedCells[$y][$x + 1]->getAttribute('playerId') == 0
+        ){ $this->changeNeighborSquare($serializedCells, $x + 1, $y, $player, $count); }
+    }
+
+    /**
+     * @param array $serializedCells
+     * @param int $x
+     * @param int $y
+     * @param Player $player
+     * @param int $count
+     */
+    public function changeNeighborSquare(array $serializedCells, int $x, int $y, Player $player, int &$count){
+        $serializedCells[$y][$x]->update([
             'playerId' => $player->getAttribute('id'),
             'color' => $player->getAttribute('color'),
         ]);
-        $serializedCells[$x][$y]->setAttribute('playerId', $player->getAttribute('id'));
-        $serializedCells[$x][$y]->setAttribute('color', $player->getAttribute('color') );
-        $serializedCells[$x][$y]->save();
-        $this->checkNeighbors($serializedCells, $x, $y, $player, $count);
+        $serializedCells[$y][$x]->setAttribute('playerId', $player->getAttribute('id'));
+        $serializedCells[$y][$x]->setAttribute('color', $player->getAttribute('color') );
+        $serializedCells[$y][$x]->save();
+        $this->checkNeighborsSquare($serializedCells, $x, $y, $player, $count);
+    }
+
+    /**
+     * @param array $serializedCells
+     * @param int $x
+     * @param int $y
+     * @param Player $player
+     * @param int $count
+     */
+    public function changeNeighborRhombus(array $serializedCells, int $x, int $y, Player $player, int &$count){
+        $serializedCells[$y][$x]->update([
+            'playerId' => $player->getAttribute('id'),
+            'color' => $player->getAttribute('color'),
+        ]);
+        $serializedCells[$y][$x]->setAttribute('playerId', $player->getAttribute('id'));
+        $serializedCells[$y][$x]->setAttribute('color', $player->getAttribute('color') );
+        $serializedCells[$y][$x]->save();
+        $this->checkNeighborsRhombus($serializedCells, $x, $y, $player, $count);
     }
 
     /**
@@ -305,14 +381,14 @@ class GameService
 
                 if ($i == 0 && $j == 0){
                     $cell->fill([
-                        'color' => self::colors[rand(0, 6)],
+                        'color' => Player::where('id', $players[0]->id)->first()->color,
                         'playerId' => $players[0]->id
                     ]);
                 }
 
                 else if ($i + 1 == $field->getAttribute('width') && $j + 1 == $field->getAttribute('height')){
                     $cell->fill([
-                        'color' => self::colors[rand(0, 6)],
+                        'color' => Player::where('id', $players[1]->id)->first()->color,
                         'playerId' => $players[1]->id
                     ]);
                 }

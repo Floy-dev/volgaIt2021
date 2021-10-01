@@ -19,7 +19,7 @@ class GameService
     const beautyColors = ['#1F5ACC', '#5CDA5A', '#88DCEE', '#D33838', '#B562E8', '#F5D83C', '#FFFFFF'];
 
     const type = 'rhombus'; // rhombus | square
-    const colorsType = 'beautyColors'; // beautyColors | colors
+    const colorsType = 'colors'; // beautyColors | colors
 
     /**
      * @param NewGameDto $dto

@@ -142,6 +142,7 @@
    	DB_USERNAME=ваш_username_от_бд 
    	DB_PASSWORD=ваш_password_от_бд   
 <hr>
+
 7) Готово - ©Floy TYZ - перейти на volga.local
 
-	
+<hr>

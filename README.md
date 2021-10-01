@@ -1,5 +1,10 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="laravle"></a></p>
 
+<hr>
+<p>В игре присутствует два <b>режима</b> - куб и ромб, а также два варианта цветов</p>
+<p>GameService - константы <b>type</b> и <b>colorsType</b></p>
+<hr>
+
 <h1> Установка зависимостей</h1>
 
 - Установка php-fpm

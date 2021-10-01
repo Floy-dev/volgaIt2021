@@ -78,7 +78,7 @@
 
    	cd ~
    	git clone https://github.com/Floy-dev/volgaIt2021.git volga
-
+<hr>
 2) Инициализация
 
    	cd ~
@@ -86,7 +86,7 @@
    	composer i
    	yarn
    	yarn watch
-
+<hr>
 3) Редактирование nginx conf
 
    	sudo vim /etc/hosts
@@ -122,16 +122,16 @@
                    fastcgi_param PATH_INFO $fastcgi_path_info;
            }
    	}
-
+<hr>
 4)  Перезапуск nginx и php-fpm
 
     	sudo systemctl restart nginx.service 
     	sudo systemctl restart php7.4-fpm.service 
-
+<hr>
 5) Создание в MySQL новую базу данных - volga
 
    	Использовать adminer | phpmyadmin на свое усмотрение
-
+<hr>
 6) Настройка подключения к БД
 
    	Скопировать файл .env.exampe > .env и изменить следующие:
@@ -141,7 +141,7 @@
    	DB_DATABASE=volga  
    	DB_USERNAME=ваш_username_от_бд 
    	DB_PASSWORD=ваш_password_от_бд   
-
+<hr>
 7) Готово - ©Floy TYZ - перейти на volga.local
 
 	

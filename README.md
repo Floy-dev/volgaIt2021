@@ -77,6 +77,7 @@
 
 1) Клонирование
 
+
    	cd ~
    	git clone https://github.com/Floy-dev/volgaIt2021.git volga
 <hr>

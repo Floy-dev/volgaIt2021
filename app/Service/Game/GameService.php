@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\DB;
 class GameService
 {
     const colors = ['blue', 'green', 'cyan', 'red', 'magenta', 'yellow', 'white'];
+    const beautyColors = ['#1F5ACC', '#5CDA5A', '#88DCEE', '#D33838', '#B562E8', '#F5D83C', '#FFFFFF'];
+
     const type = 'rhombus'; // rhombus | square
+    const colorsType = 'beautyColors'; // beautyColors | colors
 
     /**
      * @param NewGameDto $dto
@@ -85,7 +88,7 @@ class GameService
         $enemy = $this->getEnemy($game, $dto);
         if ($enemy->getAttribute('color') == $dto->getColor() ||
             $player->getAttribute('color') == $dto->getColor() ||
-            !in_array($dto->getColor(), self::colors)
+            !in_array($dto->getColor(), $this->getColors())
         ){
             throw new BusinessException('Игрок с указанным номером не может выбрать указанный цвет', 409);
         }
@@ -133,7 +136,12 @@ class GameService
      */
     public function getColors(): array
     {
-        return self::colors;
+        if (self::colorsType == 'colors'){
+            return self::colors;
+        }
+        else{
+            return self::beautyColors;
+        }
     }
 
     /**
@@ -331,7 +339,7 @@ class GameService
         for ($i = 0; $i < 2; $i++){
             $player = new Player();
             $player->fill([
-                'color' => self::colors[rand(0, 6)]
+                'color' => $this->getColors()[rand(0, 6)]
             ]);
             $player->game()->associate($game)->save();
             $player->save();
@@ -386,7 +394,7 @@ class GameService
                     ]);
                 }
 
-                else if ($i + 1 == $field->getAttribute('width') && $j + 1 == $field->getAttribute('height')){
+                else if ($i + 1 == $field->getAttribute('height') && $j + 1 == $field->getAttribute('width')){
                     $cell->fill([
                         'color' => Player::where('id', $players[1]->id)->first()->color,
                         'playerId' => $players[1]->id
@@ -395,7 +403,7 @@ class GameService
 
                 else {
                     $cell->fill([
-                        'color' => self::colors[rand(0, 6)],
+                        'color' => $this->getColors()[rand(0, 6)],
                         'playerId' => 0
                     ]);
                 }

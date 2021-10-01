@@ -1,61 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="laravle"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<h1> Установка зависимостей</h1>
 
-## About Laravel
+- Установка php-fpm
+- Установка node
+- Установка yarn
+- Установка mySql
+- Установка composer
+- Установка nginx
+- Установка git
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p> Используется ОС - Linux Ubuntu </p>
+<hr>
+1) Установка php7.4 и php-fpm7.4:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+	sudo apt-get update
+	sudo apt -y install software-properties-common
+	sudo add-apt-repository ppa:ondrej/php
+	sudo apt-get update
+	sudo apt -y install php7.4
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+	После этого php будет установлен, осталось установить php-fpm и зависимости для него:
+	sudo apt-get install -y php7.4-cli php7.4-json php7.4-common php7.4-mysql 
+	php7.4-gd php7.4-mbstring php7.4-curl php7.4-xml php7.4-fpm
+<hr>
+2) Установка node
 
-## Learning Laravel
+	cd ~
+	curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+	sudo bash nodesource_setup.sh
+	sudo apt install nodejs
+	node -v
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+	Здесь мы переходим в корневую директорию, с помощью curl берем файл с установкой
+	ноды 14.х версии. Закидываем установщик в bash и устанавливаем ее. Далее можно 
+	проверить версию. 
+<hr>
+3) Установка yarn
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+	sudo apt install --no-install-recommends yarn
+<hr>
+4) Установка mySql
 
-## Laravel Sponsors
+	sudo apt install mysql-server
+	sudo mysql_secure_installation // выбираем минимальный уровень защиты
+	
+	Устанавливаем пароль для ROOT пользователя mySql
+	sudo mysql
+	
+	CREATE USER 'floy'@'localhost'IDENTIFIED WITH mysql_native_password BY 'floy2310';
+	GRANT ALL PRIVILEGES ON *.* TO 'floy'@'localhost' WITH GRANT OPTION;
+	FLUSH PRIVILEGES;
+<hr>
+5) Установка composer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+	sudo apt install php-cli unzip
+	cd ~
+	curl -sS https://getcomposer.org/installer -o composer-setup.php
+	HASH=`curl -sS https://composer.github.io/installer.sig`
+	php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
-### Premium Partners
+	sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+<hr>
+6) Установка nginx
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+	sudo apt install nginx	
+<hr>
+7) Установка git
 
-## Contributing
+	sudo apt install git
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<h2>Установка проекта</h2>
 
-## Code of Conduct
+1) Клонирование
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   	cd ~
+   	git clone https://github.com/Floy-dev/volgaIt2021.git volga
 
-## Security Vulnerabilities
+2) Инициализация
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   	cd ~
+   	cd volga/
+   	composer i
+   	yarn
+   	yarn watch
 
-## License
+3) Редактирование nginx conf
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   	sudo vim /etc/hosts
+   	Добавить следующее:
+   	127.0.0.1	volga.local
+
+   	sudo vim /etc/nginx/nginx.conf
+   	Добавить следующее:
+
+   	server {
+           listen 80;
+           server_name volga.local www.volga.local;
+           root ~/volga/public;
+           index index.php;
+
+           client_max_body_size 300m;
+
+           location / {
+                   try_files $uri $uri/ /index.php?$query_string;
+           }
+
+           location ~ /images/cache/ {
+                   try_files $uri /index.php?$query_string;
+           }
+
+           location ~ \.php$ {
+                   try_files $uri $uri/ /index.php$query_string;
+                   fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                   fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+                   fastcgi_index index.php;
+                   include fastcgi_params;
+                   fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                   fastcgi_param PATH_INFO $fastcgi_path_info;
+           }
+   	}
+
+4)  Перезапуск nginx и php-fpm
+
+    	sudo systemctl restart nginx.service 
+    	sudo systemctl restart php7.4-fpm.service 
+
+5) Создание в MySQL новую базу данных - volga
+
+   	Использовать adminer | phpmyadmin на свое усмотрение
+
+6) Настройка подключения к БД
+
+   	Скопировать файл .env.exampe > .env и изменить следующие:
+   	DB_CONNECTION=mysql  
+   	DB_HOST=127.0.0.1  
+   	DB_PORT=3306  
+   	DB_DATABASE=volga  
+   	DB_USERNAME=ваш_username_от_бд 
+   	DB_PASSWORD=ваш_password_от_бд   
+
+7) Готово - ©Floy TYZ - перейти на volga.local
+
+	
